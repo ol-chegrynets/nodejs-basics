@@ -32,6 +32,7 @@ export const startServer = () => {
       message: 'Hello, Home Page!',
     });
   });
+  
 
   app.get('/students', async (req, res) => {
     const students = await getAllStudents();
