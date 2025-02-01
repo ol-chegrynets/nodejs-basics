@@ -1,11 +1,11 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
-import studentsRouter from './routers/students.js';
 import { ENV_VARS } from './constants/env.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
-import { errorHandler } from './middlewares/errorHandler.js';
+import { errorHandlerMiddlewqares } from './middlewares/errorHandler.js';
+import router from './routers/students.js';
 
 const PORT = Number(getEnvVar(ENV_VARS.PORT, 3000));
 
@@ -34,11 +34,11 @@ export const startServer = () => {
     });
   });
 
-  app.use(studentsRouter);
+  app.use(router);
 
   app.use('*', notFoundHandler);
 
-  app.use(errorHandler);
+  app.use(errorHandlerMiddlewqares);
 
   app.listen(PORT, () => {
     console.log('====================================');
