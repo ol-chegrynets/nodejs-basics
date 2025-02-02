@@ -1,10 +1,11 @@
 import { Router } from 'express';
-import { studentsRouter } from './students.js';
+import studentsRouter from './students.js';
+import passwordRouter from './password.js';
 
 const router = Router();
 
-router.use(studentsRouter);
+router.use(passwordRouter);
 
-// router.use(authRouter);
+router.use(studentsRouter);
 
 export default router;
