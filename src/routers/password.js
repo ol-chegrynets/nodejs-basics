@@ -3,6 +3,6 @@ import checkApiKey from '../middlewares/checkAPIKey.js';
 
 const router = Router();
 
-router.get('/password', checkApiKey);
+router.get('/', checkApiKey);
 
 export default router;

@@ -6,6 +6,7 @@ import {
   getStudentById,
   updateStudent,
 } from '../services/students.js';
+import { missingValue } from '../middlewares/missingValue.js';
 
 export const getStudentsController = async (req, res, next) => {
   const students = await getAllStudents();
@@ -21,9 +22,13 @@ export const getStudentByIdController = async (req, res) => {
   const { studentId } = req.params;
   const student = await getStudentById(studentId);
 
-  if (!student) {
-    throw createHttpError(404, 'Student not found');
-  }
+  missingValue(student);
+
+  // if (!student) {
+  //   // throw createHttpError(404, 'Student not found');
+  //   // throw createHttpError[404]('Student not found');
+  //   return next(new createHttpError.NotFound('Student not found:('));
+  // }
 
   res.json({
     status: 200,

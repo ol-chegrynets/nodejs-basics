@@ -13,22 +13,17 @@ const PORT = Number(getEnvVar(ENV_VARS.PORT, 3000));
 export const startServer = () => {
   const app = express();
 
-  app.use(
-    express.json({
-      type: ['application/json', 'application/vnd.api+json'],
-      limit: '100kb',
-    }),
-  );
+  // app.use(express.json());
 
   app.use(cors());
 
-  app.use(
-    pino({
-      transport: {
-        target: 'pino-pretty',
-      },
-    }),
-  );
+  // app.use(
+  //   pino({
+  //     transport: {
+  //       target: 'pino-pretty',
+  //     },
+  //   }),
+  // );
 
   app.use((req, res, next) => {
     console.log(`Time: ${new Date().toLocaleString()}`);
@@ -36,7 +31,7 @@ export const startServer = () => {
     next();
   });
   //
-  app.use(passwordRouter);
+  // app.use(passwordRouter);
 
   app.get('/', (req, res) => {
     res.json({
