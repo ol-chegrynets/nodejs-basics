@@ -8,6 +8,7 @@ import {
 } from '../services/students.js';
 import { missingValue } from '../middlewares/missingValue.js';
 
+
 export const getStudentsController = async (req, res, next) => {
   const students = await getAllStudents();
 
@@ -92,5 +93,14 @@ export const patchStudentController = async (req, res, next) => {
     status: 200,
     message: `Successfully patched a student!`,
     data: result.student,
+
+  if (!student) {
+    throw createHttpError(404, 'Student not found');
+  }
+  // Відповідь, якщо контакт знайдено
+  res.json({
+    status: 200,
+    message: `Successfully found student with id ${studentId}!`,
+    data: student,
   });
 };

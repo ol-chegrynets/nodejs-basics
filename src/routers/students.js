@@ -1,3 +1,4 @@
+
 import express from 'express';
 import {
   createStudentController,
@@ -15,9 +16,11 @@ const jsonParser = express.json({
   limit: '100kb',
 });
 
+
 router.get('/students', ctrlWrapper(getStudentsController));
 
 router.get('/students/:studentId', ctrlWrapper(getStudentByIdController));
+
 
 router.post('/students', jsonParser, ctrlWrapper(createStudentController));
 
@@ -34,5 +37,6 @@ router.patch(
   jsonParser,
   ctrlWrapper(patchStudentController),
 );
+
 
 export default router;
