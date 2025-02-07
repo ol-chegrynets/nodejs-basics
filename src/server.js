@@ -7,9 +7,6 @@ import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandlerMiddlewqares } from './middlewares/errorHandler.js';
 import router from './routers/students.js';
 
-import passwordRouter from './routers/password.js';
-
-
 const PORT = Number(getEnvVar(ENV_VARS.PORT, 3000));
 
 export const startServer = () => {
@@ -31,16 +28,6 @@ export const startServer = () => {
     console.log(`Time: ${new Date().toLocaleString()}`);
     console.log('====================================');
     next();
-  });
-
-  //
-  // app.use(passwordRouter);
-
-
-  app.get('/', (req, res) => {
-    res.json({
-      message: 'Hello, Home Page!',
-    });
   });
 
   app.use(router);
