@@ -15,48 +15,43 @@ import {
 } from '../validation/students.js';
 import { isValidId } from '../middlewares/imValidId.js';
 
-const router = express.Router();
+const studentsRouter = express.Router();
+
 const jsonParser = express.json({
   type: ['application/json', 'application/vnd.api+json'],
   limit: '100kb',
 });
 
-router.get('/students', ctrlWrapper(getStudentsController));
+studentsRouter.use('/students/:studentId', isValidId('studentId'));
 
-router.get(
+studentsRouter.get('/students', ctrlWrapper(getStudentsController));
+studentsRouter.get(
   '/students/:studentId',
-  isValidId,
   ctrlWrapper(getStudentByIdController),
 );
-
-router.post(
+studentsRouter.post(
   '/students',
   jsonParser,
   validateBody(createStudentSchema),
   ctrlWrapper(createStudentController),
 );
 
-router.delete(
+studentsRouter.delete(
   '/students/:studentId',
-  isValidId,
   validateBody(createStudentSchema),
   ctrlWrapper(deleteStudentController),
 );
-
-router.put(
+studentsRouter.put(
   '/students/:studentId',
   jsonParser,
-  isValidId,
   validateBody(createStudentSchema),
   ctrlWrapper(upsertStudentController),
 );
-
-router.patch(
+studentsRouter.patch(
   '/students/:studentId',
   jsonParser,
-  isValidId,
   validateBody(updateStudentSchema),
   ctrlWrapper(patchStudentController),
 );
 
-export default router;
+export default studentsRouter;

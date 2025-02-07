@@ -9,6 +9,14 @@ export const errorHandlerMiddlewqares = (err, req, res, next) => {
     return;
   }
 
+  if (err.isJoi) {
+    return res.status(444).json({
+      status: 444,
+      message: err.message,
+      name: 'Validation Error',
+    });
+  }
+
   res.status(500).json({
     status: 500,
     message: 'Something went wrong',

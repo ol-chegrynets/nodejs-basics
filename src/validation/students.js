@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { GENDERS } from '../constants/gender.js';
 
 const userData = {
   'string.base': 'Username should be a string',
@@ -13,8 +14,10 @@ export const createStudentSchema = Joi.object({
     .max(30)
     .required()
     .messages(userData, { abortEarly: false }),
-  age: Joi.number().integer().min(6).max(16).required(),
-  gender: Joi.string().valid('male', 'female', 'other').required(),
+  age: Joi.number().integer().min(6).max(22).required(),
+  gender: Joi.string()
+    .valid(...Object.values(GENDERS))
+    .required(),
   avgMark: Joi.number().min(2).max(12).required(),
   onDuty: Joi.boolean(),
 });
@@ -36,8 +39,8 @@ export const createStudentSchema = Joi.object({
 export const updateStudentSchema = Joi.object({
   name: Joi.string().min(3).max(30),
   email: Joi.string().email(),
-  age: Joi.number().integer().min(6).max(16),
-  gender: Joi.string().valid('male', 'female', 'other'),
+  age: Joi.number().integer().min(6).max(28),
+  gender: Joi.string().valid(...Object.values(GENDERS)),
   avgMark: Joi.number().min(2).max(12),
   onDuty: Joi.boolean(),
 });
