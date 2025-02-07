@@ -1,5 +1,7 @@
 import Joi from 'joi';
+
 import { GENDERS } from '../constants/gender.js';
+
 
 const userData = {
   'string.base': 'Username should be a string',

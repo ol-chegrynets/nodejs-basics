@@ -15,20 +15,25 @@ import {
 } from '../validation/students.js';
 import { isValidId } from '../middlewares/imValidId.js';
 
+
 const studentsRouter = express.Router();
+
 
 const jsonParser = express.json({
   type: ['application/json', 'application/vnd.api+json'],
   limit: '100kb',
 });
 
+
 studentsRouter.use('/students/:studentId', isValidId('studentId'));
 
 studentsRouter.get('/students', ctrlWrapper(getStudentsController));
+
 studentsRouter.get(
   '/students/:studentId',
   ctrlWrapper(getStudentByIdController),
 );
+
 studentsRouter.post(
   '/students',
   jsonParser,
@@ -41,12 +46,14 @@ studentsRouter.delete(
   validateBody(createStudentSchema),
   ctrlWrapper(deleteStudentController),
 );
+
 studentsRouter.put(
   '/students/:studentId',
   jsonParser,
   validateBody(createStudentSchema),
   ctrlWrapper(upsertStudentController),
 );
+
 studentsRouter.patch(
   '/students/:studentId',
   jsonParser,
@@ -55,3 +62,4 @@ studentsRouter.patch(
 );
 
 export default studentsRouter;
+
