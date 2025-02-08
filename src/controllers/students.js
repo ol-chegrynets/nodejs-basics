@@ -6,6 +6,7 @@ import {
   updateStudent,
 } from '../services/students.js';
 import { missingValue } from '../middlewares/missingValue.js';
+
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 import { parseFilterParams } from '../utils/parseFilterParams.js';
@@ -22,6 +23,7 @@ export const getStudentsController = async (req, res) => {
     sortOrder,
     filter,
   });
+
 
   res.json({
     status: 200,
