@@ -4,7 +4,7 @@ import cors from 'cors';
 import { ENV_VARS } from './constants/env.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
-import { errorHandlerMiddlewqares } from './middlewares/errorHandler.js';
+import { errorHandlerMiddlewares } from './middlewares/errorHandler.js';
 import router from './routers/students.js';
 
 const PORT = Number(getEnvVar(ENV_VARS.PORT, 3000));
@@ -34,7 +34,7 @@ export const startServer = () => {
 
   app.use('*', notFoundHandler);
 
-  app.use(errorHandlerMiddlewqares);
+  app.use(errorHandlerMiddlewares);
 
   app.listen(PORT, () => {
     console.log('====================================');

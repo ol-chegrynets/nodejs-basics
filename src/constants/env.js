@@ -1,3 +1,3 @@
- export const ENV_VARS = {
-    PORT: 'PORT',
-}
+export const ENV_VARS = {
+  PORT: 'PORT',
+};

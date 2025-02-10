@@ -29,6 +29,9 @@ export const getAllStudents = async ({
   if (filter.minAvgMark) {
     studentsQuery.where('avgMark').gte(filter.minAvgMark);
   }
+  if (filter.onDuty) {
+    studentsQuery.where('onDuty').equals(filter.onDuty);
+  }
 
   // const studentsCount = await StudentsCollection.find()
   //   .merge(studentsQuery)
@@ -39,6 +42,11 @@ export const getAllStudents = async ({
   //   .limit(limit)
   //   .sort({ [sortBy]: sortOrder })
   //   .exec();
+
+  // const [studentsCount, students] = await Promise.all([
+  //   studentsCountQuery,
+  //   studentsParseQuery,
+  // ]);
   const [studentsCount, students] = await Promise.all([
     StudentsCollection.find().merge(studentsQuery).countDocuments(),
     studentsQuery
@@ -47,7 +55,6 @@ export const getAllStudents = async ({
       .sort({ [sortBy]: sortOrder })
       .exec(),
   ]);
-
   const paginationData = calculatePaginationData(studentsCount, perPage, page);
 
   return {

@@ -1,33 +1,25 @@
-const parseGender = (gender) => {
-  //   const isString = typeof gender === 'string';
-  //   if (!isString) return;
-  if (!(typeof gender === 'string')) return;
+import { GENDERS } from '../constants/gender.js';
+import { parseNumber } from './parseNumber.js';
 
-  const isGender = (gender) => ['male', 'female', 'other'].includes(gender);
-  if (isGender(gender)) return gender;
+const parseGender = (gender) => {
+  if (!(typeof gender === 'string')) return;
+  if (Object.values(GENDERS).includes(gender)) return gender;
+  return console.log('Filter gender is not valid');
 };
 
-const parseNumber = (number) => {
-  //   const isString = typeof number === 'string';
-  //     if (!isString) return;
-  if (!(typeof number === 'string')) return;
-
-  const parsedNumber = parseInt(number);
-  if (Number.isNaN(parsedNumber)) {
-    return;
-  }
-
-  return parsedNumber;
+const parseBoolean = (onDuty) => {
+  if ([true, false].includes(onDuty)) return JSON.parse(onDuty);
 };
 
 export const parseFilterParams = (query) => {
-  const { gender, maxAge, minAge, maxAvgMark, minAvgMark } = query;
+  const { gender, maxAge, minAge, maxAvgMark, minAvgMark, onDuty } = query;
 
   const parsedGender = parseGender(gender);
   const parsedMaxAge = parseNumber(maxAge);
   const parsedMinAge = parseNumber(minAge);
   const parsedMaxAvgMark = parseNumber(maxAvgMark);
   const parsedMinAvgMark = parseNumber(minAvgMark);
+  const parsedOnDuty = parseBoolean(onDuty);
 
   return {
     gender: parsedGender,
@@ -35,5 +27,6 @@ export const parseFilterParams = (query) => {
     minAge: parsedMinAge,
     maxAvgMark: parsedMaxAvgMark,
     minAvgMark: parsedMinAvgMark,
+    onDuty: parsedOnDuty,
   };
 };
