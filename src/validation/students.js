@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 import { GENDERS } from '../constants/gender.js';
-
+import { isValidObjectId } from 'mongoose';
 
 const userData = {
   'string.base': 'Username should be a string',
@@ -22,6 +22,12 @@ export const createStudentSchema = Joi.object({
     .required(),
   avgMark: Joi.number().min(2).max(12).required(),
   onDuty: Joi.boolean(),
+  parentId: Joi.string().custom((value, helper) => {
+    if (value && !isValidObjectId(value)) {
+      return helper.message('Parent id should be a valid mongo id');
+    }
+    return true;
+  }),
 });
 
 // const dataToValidate = {

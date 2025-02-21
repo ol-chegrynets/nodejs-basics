@@ -5,9 +5,10 @@ import { ENV_VARS } from './constants/env.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandlerMiddlewares } from './middlewares/errorHandler.js';
-import router from './routers/students.js';
+import cookieParser from 'cookie-parser';
+import router from './routers/index.js';
 
-const PORT = Number(getEnvVar(ENV_VARS.PORT, 3000));
+const PORT = Number(getEnvVar(ENV_VARS.PORT, 8081));
 
 export const startServer = () => {
   const app = express();
@@ -15,6 +16,7 @@ export const startServer = () => {
   // app.use(express.json());
 
   app.use(cors());
+  app.use(cookieParser());
 
   // app.use(
   //   pino({
@@ -29,6 +31,12 @@ export const startServer = () => {
     console.log('====================================');
     next();
   });
+
+  // app.get('/auth', (req, res) => {
+  //   res.json({
+  //     message: 'Hello, Home Page!',
+  //   });
+  // });
 
   app.use(router);
 
