@@ -8,6 +8,7 @@ const parseGender = (gender) => {
 };
 
 const parseBoolean = (onDuty) => {
+
   if (!(typeof onDuty === 'string')) return;
   if (['true', 'false'].includes(onDuty)) return JSON.parse(onDuty);
 };
@@ -24,6 +25,7 @@ const parseBoolean = (onDuty) => {
 //   }
 //   return;
 // };
+
 
 export const parseFilterParams = (query) => {
   const { gender, maxAge, minAge, maxAvgMark, minAvgMark, onDuty } = query;

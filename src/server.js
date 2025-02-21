@@ -5,8 +5,10 @@ import { ENV_VARS } from './constants/env.js';
 import { getEnvVar } from './utils/getEnvVar.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandlerMiddlewares } from './middlewares/errorHandler.js';
+
 import cookieParser from 'cookie-parser';
 import router from './routers/index.js';
+
 
 const PORT = Number(getEnvVar(ENV_VARS.PORT, 8081));
 
