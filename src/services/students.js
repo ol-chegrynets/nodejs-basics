@@ -29,15 +29,17 @@ export const getAllStudents = async ({
   if (filter.minAvgMark) {
     studentsQuery.where('avgMark').gte(filter.minAvgMark);
   }
-  if (filter.onDuty) {
+
+  if (filter.onDuty !== undefined) {
+
     studentsQuery.where('onDuty').equals(filter.onDuty);
   }
 
-  // const studentsCount = await StudentsCollection.find()
+  // const studentsCountQuery = await StudentsCollection.find()
   //   .merge(studentsQuery)
   //   .countDocuments();
 
-  // const students = await studentsQuery
+  // const studentsParseQuery = await studentsQuery
   //   .skip(skip)
   //   .limit(limit)
   //   .sort({ [sortBy]: sortOrder })
@@ -55,6 +57,7 @@ export const getAllStudents = async ({
       .sort({ [sortBy]: sortOrder })
       .exec(),
   ]);
+
   const paginationData = calculatePaginationData(studentsCount, perPage, page);
 
   return {

@@ -8,8 +8,24 @@ const parseGender = (gender) => {
 };
 
 const parseBoolean = (onDuty) => {
-  if ([true, false].includes(onDuty)) return JSON.parse(onDuty);
+
+  if (!(typeof onDuty === 'string')) return;
+  if (['true', 'false'].includes(onDuty)) return JSON.parse(onDuty);
 };
+
+// const parseBoolean = (value) => {
+//   const isString = typeof value === 'string';
+//   if (!isString) return;
+
+//   const trimmedValue = value.trim().toLowerCase();
+//   if (trimmedValue === 'true') {
+//     return true;
+//   } else if (trimmedValue === 'false') {
+//     return false;
+//   }
+//   return;
+// };
+
 
 export const parseFilterParams = (query) => {
   const { gender, maxAge, minAge, maxAvgMark, minAvgMark, onDuty } = query;
