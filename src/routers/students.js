@@ -21,25 +21,25 @@ import jsonParser from '../middlewares/jsonParser.js';
 
 const studentsRouter = express.Router();
 
-studentsRouter.use(authenticate);
+// studentsRouter.use(authenticate);
 
 studentsRouter.use('/students/:studentId', isValidId('studentId'));
 
 studentsRouter.get(
   '/students',
-  checkRoles(ROLES.TEACHER),
+  // checkRoles(ROLES.TEACHER),
   ctrlWrapper(getStudentsController),
 );
 
 studentsRouter.get(
   '/students/:studentId',
-  checkRoles(ROLES.TEACHER, ROLES.PARENT),
+  // checkRoles(ROLES.TEACHER, ROLES.PARENT),
   ctrlWrapper(getStudentByIdController),
 );
 
 studentsRouter.post(
   '/students',
-  checkRoles(ROLES.TEACHER),
+  // checkRoles(ROLES.TEACHER),
   jsonParser,
   validateBody(createStudentSchema),
   ctrlWrapper(createStudentController),
@@ -47,14 +47,14 @@ studentsRouter.post(
 
 studentsRouter.delete(
   '/students/:studentId',
-  checkRoles(ROLES.TEACHER),
+  // checkRoles(ROLES.TEACHER),
   validateBody(createStudentSchema),
   ctrlWrapper(deleteStudentController),
 );
 
 studentsRouter.put(
   '/students/:studentId',
-  checkRoles(ROLES.TEACHER),
+  // checkRoles(ROLES.TEACHER),
   jsonParser,
   validateBody(createStudentSchema),
   ctrlWrapper(upsertStudentController),
@@ -62,7 +62,7 @@ studentsRouter.put(
 
 studentsRouter.patch(
   '/students/:studentId',
-  checkRoles(ROLES.TEACHER, ROLES.PARENT),
+  // checkRoles(ROLES.TEACHER, ROLES.PARENT),
   jsonParser,
   validateBody(updateStudentSchema),
   ctrlWrapper(patchStudentController),
